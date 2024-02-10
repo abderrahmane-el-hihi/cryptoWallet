@@ -1,8 +1,12 @@
-import 'package:anima/HomePage.dart';
+import 'package:anima/pages/ConvertPage.dart';
+import 'package:anima/pages/NotificationPage.dart';
+import 'package:anima/pages/SettingsPage.dart';
+import 'package:anima/pages/WalletPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 
 class GNavBar extends StatelessWidget {
   void Function(int)? onTabChange;
@@ -11,20 +15,21 @@ class GNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GNav(
-      tabActiveBorder: Border.all(color: Colors.green.shade400, width: 0.5),
+      tabActiveBorder: Border.all(
+          color: Theme.of(context).colorScheme.inversePrimary, width: 0.5),
       backgroundColor: Colors.grey.shade100,
       hoverColor: Colors.grey[100]!,
-      activeColor: Colors.green.shade400,
+      activeColor: Theme.of(context).colorScheme.inversePrimary,
       textStyle: TextStyle(
-        color: Colors.green.shade400,
+        color: Theme.of(context).colorScheme.inversePrimary,
         fontSize: 12,
       ),
-      tabBackgroundColor: const Color.fromARGB(25, 102, 187, 106),
+      tabBackgroundColor: Colors.transparent,
       color: const Color.fromARGB(255, 143, 143, 143),
       gap: 8,
       iconSize: 24,
-      tabMargin: const EdgeInsets.all(8),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      tabMargin: const EdgeInsets.symmetric(vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -32,18 +37,18 @@ class GNavBar extends StatelessWidget {
       tabs: [
         GButton(
           borderRadius: BorderRadius.circular(15),
-          icon: Icons.home_rounded,
-          text: 'Accueil',
+          icon: Icons.wallet,
+          text: 'Wallet',
         ),
         GButton(
           borderRadius: BorderRadius.circular(15),
-          icon: CupertinoIcons.calendar,
-          text: 'Calendrier',
+          icon: CupertinoIcons.arrow_right_arrow_left,
+          text: 'Convert',
         ),
         GButton(
           borderRadius: BorderRadius.circular(15),
-          icon: CupertinoIcons.person,
-          text: 'Profil',
+          icon: LucideIcons.settings,
+          text: 'Settings',
         ),
       ],
     );
@@ -68,14 +73,35 @@ class _SwitchPAgesState extends State<SwitchPages> {
   }
 
   List<Widget> pages = [
-    const HomePage(),
-    const CalendarPage(),
-    const ProfilePage()
+    const WalletPage(),
+    const ConvertPage(),
+    const SettingsPage(),
   ];
+
+  List<String> titlePages = ['Wallet', 'Convert', 'Settings'];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {}, icon: const Icon(LucideIcons.scanLine)),
+        centerTitle: true,
+        title: Text(
+          titlePages[_selectedIndex],
+          style: const TextStyle(color: Colors.black, fontSize: 16),
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const NotificationPage()));
+              },
+              icon: Icon(LucideIcons.bell))
+        ],
+      ),
       backgroundColor: Colors.black,
       bottomNavigationBar: GNavBar(onTabChange: (index) => Change(index)),
       body: pages[_selectedIndex],

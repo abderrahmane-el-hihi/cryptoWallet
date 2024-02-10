@@ -2,8 +2,6 @@ import 'package:anima/pages/LoginPage.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'HomePage.dart';
-
 Future<void> main() async {
   await Supabase.initialize(
     url: 'https://bhnfenqicpqhukoauywp.supabase.co',
@@ -27,7 +25,6 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      // home: const HomePage(),
       home: const LoginPage(),
     );
   }

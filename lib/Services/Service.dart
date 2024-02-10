@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 // import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:anima/Models/AllCoinsDTO.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -22,13 +23,16 @@ class Service {
     return response;
   }
 
+  Future getcryptocurrencies() async {
+    final response = await supabase.from('cryptocurrencies').select();
+    print(response.toString());
+    return response;
+  }
+
   Future getCoinData(
     String coin,
   ) async {
-    // final url = Uri.parse('https://api.coingecko.com/api/v3/coins/$coin');
     final url = Uri.parse(
-      // 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=$coin',
-
       'https://api.mobula.io/api/1/market/data?asset=$coin',
     );
 
@@ -36,7 +40,6 @@ class Service {
         headers: {'Authorization': 'b339f08e-a32d-4ddb-9163-d04f4aae5c00'});
     if (response.statusCode == 200) {
       // final data = json.decode(response.body);
-
       // print(data);
       return coinDtoFromJson(response.body);
     }
@@ -44,6 +47,21 @@ class Service {
     // else {
     //   throw Exception('Failed to load price');
     // }
+  }
+
+  Future getallCoins() async {
+    final url = Uri.parse(
+      'https://api.mobula.io/api/1/all',
+    );
+
+    final response = await http.get(url,
+        headers: {'Authorization': 'b339f08e-a32d-4ddb-9163-d04f4aae5c00'});
+    if (response.statusCode == 200) {
+      // final data = json.decode(response.body);
+      // print(data);
+      return allCoinsDtoFromJson(response.body);
+    }
+    print(response.body);
   }
 
   Future<String> signInEmailAndPassword(String email, String password) async {

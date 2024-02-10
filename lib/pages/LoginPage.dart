@@ -1,7 +1,8 @@
 import 'package:anima/Components/TextInput.dart';
-import 'package:anima/HomePage.dart';
+
 import 'package:anima/Services/Service.dart';
 import 'package:anima/main.dart';
+import 'package:anima/pages/SwitchPages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_auth/local_auth.dart';
@@ -90,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const HomePage()));
+                                            const SwitchPages()));
                               } else {
                                 const AlertDialog(
                                   title: Text('Check Email or Password'),
@@ -146,7 +147,8 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const HomePage()));
+                                      builder: (context) =>
+                                          const SwitchPages()));
                             }
                           },
                           icon: Icon(
