@@ -1,5 +1,6 @@
-import 'package:anima/pages/LoginPage.dart';
+import 'package:reBlock/pages/LoginPage.dart';
 import 'package:flutter/material.dart';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {

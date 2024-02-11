@@ -1,8 +1,10 @@
-import 'package:anima/Components/TextInput.dart';
+import 'package:reBlock/Components/MainButton.dart';
+import 'package:reBlock/Components/SvgButton.dart';
+import 'package:reBlock/Components/TextInput.dart';
 
-import 'package:anima/Services/Service.dart';
-import 'package:anima/main.dart';
-import 'package:anima/pages/SwitchPages.dart';
+import 'package:reBlock/Services/Service.dart';
+import 'package:reBlock/main.dart';
+import 'package:reBlock/pages/SwitchPages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_auth/local_auth.dart';
@@ -61,21 +63,11 @@ class _LoginPageState extends State<LoginPage> {
                 suffIcon: Icons.visibility_off_rounded,
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                padding: const EdgeInsets.only(right: 24, top: 12, bottom: 12),
                 child: Row(
                   children: [
                     Expanded(
-                      child: ElevatedButton(
-                          style: ButtonStyle(
-                            fixedSize: MaterialStatePropertyAll(
-                              Size(MediaQuery.of(context).size.width,
-                                  MediaQuery.of(context).size.height * .075),
-                            ),
-                            backgroundColor:
-                                const MaterialStatePropertyAll(Colors.white),
-                            elevation: const MaterialStatePropertyAll(1),
-                          ),
+                      child: MainButton(
                           onPressed: () async {
                             if (emailcontroller.text.isNotEmpty &&
                                 passwordcontroller.text.isNotEmpty) {
@@ -102,14 +94,13 @@ class _LoginPageState extends State<LoginPage> {
                                 title: Text('Fill the Email and Password'),
                               );
                             }
+
+                            emailcontroller.clear();
+                            passwordcontroller.clear();
                           },
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 12),
-                            child: Text(
-                              'Sign In',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          )),
+                          hasIcon: false,
+                          icondata: Icons.abc,
+                          title: 'Sign In'),
                     ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * .02,
@@ -142,7 +133,6 @@ class _LoginPageState extends State<LoginPage> {
                                     stickyAuth: true, useErrorDialogs: true),
                               );
                             }
-
                             if (isAuthentificated) {
                               Navigator.pushReplacement(
                                   context,
@@ -190,52 +180,14 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                child: ElevatedButton(
-                    style: const ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(Colors.white),
-                      elevation: MaterialStatePropertyAll(1),
-                    ),
-                    onPressed: () {},
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset('assets/google.svg'),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * .02,
-                          ),
-                          const Text('Sign In with Google'),
-                        ],
-                      ),
-                    )),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                child: ElevatedButton(
-                    style: const ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(Colors.white),
-                      elevation: MaterialStatePropertyAll(1),
-                    ),
-                    onPressed: () {},
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset('assets/facebook.svg'),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * .02,
-                          ),
-                          const Text('Sign In with Facebook'),
-                        ],
-                      ),
-                    )),
-              ),
+              SvgButton(
+                  imgsrc: 'assets/google.svg',
+                  onPressed: () {},
+                  title: 'Sign In with Google'),
+              SvgButton(
+                  imgsrc: 'assets/facebook.svg',
+                  onPressed: () {},
+                  title: 'Sign In with Facebook'),
             ],
           ),
         ),

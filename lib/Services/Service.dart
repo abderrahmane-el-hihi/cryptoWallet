@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-// import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:anima/Models/AllCoinsDTO.dart';
+import 'package:reBlock/Models/AllCoinsDTO.dart';
 import 'package:http/http.dart' as http;
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -23,9 +23,8 @@ class Service {
     return response;
   }
 
-  Future getcryptocurrencies() async {
+  Future<List<Map<String, dynamic>>> getcryptocurrencies() async {
     final response = await supabase.from('cryptocurrencies').select();
-    print(response.toString());
     return response;
   }
 

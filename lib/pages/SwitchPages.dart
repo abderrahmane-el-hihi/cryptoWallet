@@ -1,7 +1,7 @@
-import 'package:anima/pages/ConvertPage.dart';
-import 'package:anima/pages/NotificationPage.dart';
-import 'package:anima/pages/SettingsPage.dart';
-import 'package:anima/pages/WalletPage.dart';
+import 'package:reBlock/pages/ConvertPage.dart';
+import 'package:reBlock/pages/NotificationPage.dart';
+import 'package:reBlock/pages/SettingsPage.dart';
+import 'package:reBlock/pages/WalletPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
